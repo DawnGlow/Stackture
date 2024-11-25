@@ -96,12 +96,52 @@ export class TechStackSearch {
             this.selectedTechs.has(tech.id)
         );
 
-        this.selectedGrid.innerHTML = selectedTechStacks.map(tech => `
-            <div class="tech-item selected" data-id="${tech.id}">
-                <img src="${tech.icon}" alt="${tech.name}" class="tech-icon">
-                <span>${tech.name}</span>
-                <button class="remove-btn" onclick="this.removeTechStack(${tech.id})">×</button>
-            </div>
-        `).join('');
+        // 모든 카테고리 목록 가져오기
+        const allCategories = [...new Set(this.techStacks.map(tech => tech.category))];
+
+        // 카테고리 한글 매핑
+        const categoryNames = {
+            frontend: '프론트엔드',
+            backend: '백엔드',
+            database: '데이터베이스',
+            devops: '데브옵스',
+            language: '프로그래밍 언어',
+            cloud: '클라우드'
+        };
+
+        // 각 카테고리별 영역 생성
+        this.selectedGrid.innerHTML = allCategories.map(category => {
+            const techsInCategory = selectedTechStacks.filter(tech => tech.category === category);
+            
+            if (techsInCategory.length === 0) return ''; // 해당 카테고리에 선택된 기술이 없으면 건너뜀
+
+            return `
+                <div class="category-section">
+                    <h4 class="category-title">${categoryNames[category] || category}</h4>
+                    <div class="category-items">
+                        ${techsInCategory.map(tech => `
+                            <div class="tech-item selected" data-id="${tech.id}">
+                                <img src="${tech.icon}" alt="${tech.name}" class="tech-icon">
+                                <span>${tech.name}</span>
+                                <button class="remove-btn" data-tech-id="${tech.id}">×</button>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        // 제거 버튼에 이벤트 리스너 추가
+        this.selectedGrid.querySelectorAll('.remove-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const techId = Number(e.target.dataset.techId);
+                this.removeTechStack(techId);
+            });
+        });
+    }
+
+    removeTechStack(techId) {
+        this.selectedTechs.delete(techId);
+        this.updateSelectedGrid();
     }
 }

@@ -62,6 +62,32 @@ body {
     position: relative;
 }
 
+/* main.css에 추가 */
+.search-bar {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.draw-button {
+    padding: 0 2rem;
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.draw-button:hover {
+    background-color: #1976d2;
+}
+
+.search-box {
+    flex: 1;
+}
+
 .search-box {
     width: 100%;
     padding: 1rem;
@@ -175,4 +201,48 @@ body {
 
 .remove-btn:hover {
     background-color: rgba(0,0,0,0.1);
+}
+
+.category-group {
+    margin-bottom: 1.5rem;
+}
+
+.category-title {
+    color: #666;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.category-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.category-section {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.category-title {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.category-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.selected-grid {
+    display: block;
+    gap: 1.5rem;
 }
