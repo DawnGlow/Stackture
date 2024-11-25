@@ -1,6 +1,7 @@
 import { TechStackSearch } from './components/TechStackSearch.js';
+import { FloatingIcons } from './components/FloatingIcons.js';
 
-// 앱 초기화
 document.addEventListener('DOMContentLoaded', () => {
     new TechStackSearch();
+    new FloatingIcons();
 });
